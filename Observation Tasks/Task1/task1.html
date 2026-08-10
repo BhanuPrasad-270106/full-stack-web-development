@@ -1,0 +1,242 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Information Portal</title>
+</head>
+
+<body>
+
+<header>
+    <h1>College Information Portal</h1>
+    <p>Welcome to the College Information Portal.</p>
+</header>
+
+<nav>
+    <a href="#about">About</a> |
+    <a href="#students">Students</a> |
+    <a href="#registration">Registration</a> |
+    <a href="#media">Media</a>
+</nav>
+
+<section id="about">
+
+    <article>
+
+        <h2>About Our College</h2>
+
+        <p>
+            ANITS is one of the leading engineering colleges offering quality education.
+        </p>
+
+        <h3>Text Formatting</h3>
+
+        <p>
+            <b>Bold Text</b><br>
+            <i>Italic Text</i><br>
+            <u>Underlined Text</u><br>
+            H<sub>2</sub>O (Subscript)<br>
+            x<sup>2</sup> (Superscript)
+        </p>
+
+        <h3>Ordered List</h3>
+
+        <ol>
+            <li>CSE</li>
+            <li>AIML</li>
+            <li>ECE</li>
+            <li>EEE</li>
+        </ol>
+
+        <h3>Unordered List</h3>
+
+        <ul>
+            <li>Library</li>
+            <li>Laboratories</li>
+            <li>Sports</li>
+            <li>Hostel</li>
+        </ul>
+
+        <h3>Hyperlinks</h3>
+
+        <a href="https://anits.edu.in" target="_blank">
+            College Website
+        </a>
+
+        <br><br>
+
+        <a href="https://www.google.com" target="_blank">
+            Google
+        </a>
+
+    </article>
+
+</section>
+
+
+<section id="students">
+
+    <h2>Student Details</h2>
+
+    <table border="1">
+
+        <tr>
+            <th>Roll No</th>
+            <th>Name</th>
+            <th>Branch</th>
+            <th>Email</th>
+        </tr>
+
+        <tr>
+            <td>101</td>
+            <td>Bhanu</td>
+            <td>AIML</td>
+            <td>bhanu@gmail.com</td>
+        </tr>
+
+        <tr>
+            <td>102</td>
+            <td>Rahul</td>
+            <td>CSE</td>
+            <td>rahul@gmail.com</td>
+        </tr>
+
+        <tr>
+            <td>103</td>
+            <td>Priya</td>
+            <td>ECE</td>
+            <td>priya@gmail.com</td>
+        </tr>
+
+    </table>
+
+
+    <h2>Images</h2>
+
+    <img src="college_logo.png" alt="College Logo" width="150">
+
+    <img src="college.jpg" alt="College Campus" width="350">
+
+</section>
+
+
+<section id="registration">
+
+    <h2>Student Registration Form</h2>
+
+    <form>
+
+        <label>Name:</label>
+        <input type="text" placeholder="Enter Name">
+
+        <br><br>
+
+        <label>Email:</label>
+        <input type="email" placeholder="Enter Email">
+
+        <br><br>
+
+        <label>Password:</label>
+        <input type="password">
+
+        <br><br>
+
+        <label>Date of Birth:</label>
+        <input type="date">
+
+        <br><br>
+
+        <label>Age:</label>
+        <input type="number">
+
+        <br><br>
+
+        <label>Favourite Color:</label>
+        <input type="color">
+
+        <br><br>
+
+        <label>Skill Level:</label>
+        <input type="range" min="1" max="10">
+
+        <br><br>
+
+        <label>Gender:</label>
+        <br>
+
+        <input type="radio" name="gender"> Male
+        <input type="radio" name="gender"> Female
+        <input type="radio" name="gender"> Other
+
+        <br><br>
+
+        <label>Hobbies:</label>
+        <br>
+
+        <input type="checkbox"> Reading
+        <input type="checkbox"> Sports
+        <input type="checkbox"> Music
+
+        <br><br>
+
+        <label>Branch:</label>
+
+        <select>
+            <option>CSE</option>
+            <option>AIML</option>
+            <option>ECE</option>
+            <option>EEE</option>
+        </select>
+
+        <br><br>
+
+        <label>Comments:</label>
+
+        <br>
+
+        <textarea rows="5" cols="40"></textarea>
+
+        <br><br>
+
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+
+    </form>
+
+</section>
+
+
+<section id="media">
+
+    <h2>Audio</h2>
+
+    <audio controls>
+        <source src="college.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio>
+
+
+    <h2>Video</h2>
+
+    <video width="400" controls>
+        <source src="college.mp4" type="video/mp4">
+        Your browser does not support video.
+    </video>
+
+</section>
+
+
+<footer>
+
+    <p>
+        &copy; 2026 College Information Portal. All Rights Reserved.
+    </p>
+
+</footer>
+
+</body>
+</html>
+```
