@@ -1,1 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CSS Practice</title>
+    <style>
+        h1{
+            color: blue;
+            text-align: center;
+            font-size: 35px;
+        }
+        p{
+            color: green;
+            font-size: 20px;
+            font-family: Arial;
+        }
+        .box{
+            width: 300px;
+            height: 150px;
+            background-color: lightblue;
+            border: 2px solid black;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
 
+<h1>My First CSS Page</h1>
+
+<p>I am learning CSS.</p>
+
+<div class="box">
+    This is my CSS Box
+</div>
+
+</body>
+</html>
