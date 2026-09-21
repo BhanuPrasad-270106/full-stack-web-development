@@ -1,1 +1,119 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Product Calculator</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Light page background and center the calculator */
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f4f7fb;
+        }
+
+        /* Calculator card */
+        .container {
+            width: 400px;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d5dbe3;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #667eea;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            text-align: center;
+            background: #f1f4ff;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Product Calculator</h1>
+
+        <label for="productName">Product Name</label>
+        <input type="text" id="productName" placeholder="Enter product name">
+
+        <label for="quantity">Quantity</label>
+        <input type="number" id="quantity" min="1" value="1">
+
+        <label for="price">Price per Item (₹)</label>
+        <input type="number" id="price" min="0" value="0">
+
+        <div class="result">
+            Total: ₹<span id="total">0.00</span>
+        </div>
+
+    </div>
+
+    <script>
+        // Select the required HTML elements
+        const quantity = document.getElementById("quantity");
+        const price = document.getElementById("price");
+        const total = document.getElementById("total");
+
+        // Function to calculate and display the total price
+        function calculateTotal() {
+            const qty = Number(quantity.value);
+            const priceValue = Number(price.value);
+
+            const totalPrice = qty * priceValue;
+
+            total.textContent = totalPrice.toFixed(2);
+        }
+
+        // Automatically calculate when quantity or price changes
+        quantity.addEventListener("input", calculateTotal);
+        price.addEventListener("input", calculateTotal);
+    </script>
+
+</body>
+</html>
+
+
