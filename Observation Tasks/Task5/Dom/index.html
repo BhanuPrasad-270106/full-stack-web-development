@@ -1,1 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Photographer - DOM Manipulation</title>
 
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: white;
+            text-align: center;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 700px;
+            margin: 60px auto;
+            padding: 40px;
+            background: #1e1e1e;
+            border-radius: 15px;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+        }
+
+        h1 {
+            color: #f5c542;
+        }
+
+        p {
+            color: #ccc;
+            font-size: 18px;
+        }
+
+        img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin: 20px;
+            transition: 0.4s;
+        }
+
+        button {
+            padding: 12px 18px;
+            margin: 6px;
+            border: none;
+            border-radius: 8px;
+            background: #f5c542;
+            color: #111;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: white;
+        }
+
+        .reset {
+            background: #e74c3c;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1 id="title">Lens & Light Photography</h1>
+
+        <p id="description">
+            Capturing beautiful moments through the lens.
+        </p>
+
+        <img id="photo"
+             src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800"
+             alt="Camera">
+
+        <br>
+
+        <button onclick="changeContent()">Change Content</button>
+
+        <button onclick="changeStyle()">Change Style</button>
+
+        <button onclick="changeAttribute()">Change Attribute</button>
+
+        <button class="reset" onclick="resetPage()">Reset</button>
+
+    </div>
+
+    <script>
+
+        // Change content
+        function changeContent() {
+            document.getElementById("title").innerHTML =
+                "Adventure Through My Lens";
+
+            document.getElementById("description").innerHTML =
+                "Every picture tells a unique story.";
+        }
+
+        // Change style
+        function changeStyle() {
+            document.getElementById("title").style.color = "#00d9ff";
+
+            document.getElementById("description").style.fontSize = "22px";
+
+            document.getElementById("photo").style.borderRadius = "50%";
+        }
+
+        // Change attributes
+        function changeAttribute() {
+            document.getElementById("photo").setAttribute(
+                "src",
+                "https://images.unsplash.com/photo-1452780212940-6f5c0d14d848?w=800"
+            );
+
+            document.getElementById("photo").setAttribute(
+                "alt",
+                "Professional Photographer"
+            );
+
+            document.getElementById("photo").setAttribute(
+                "title",
+                "Professional Photography"
+            );
+        }
+
+        // Reset everything
+        function resetPage() {
+            document.getElementById("title").innerHTML =
+                "Lens & Light Photography";
+
+            document.getElementById("description").innerHTML =
+                "Capturing beautiful moments through the lens.";
+
+            document.getElementById("title").style.color = "#f5c542";
+
+            document.getElementById("description").style.fontSize = "18px";
+
+            document.getElementById("photo").style.borderRadius = "12px";
+
+            document.getElementById("photo").setAttribute(
+                "src",
+                "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800"
+            );
+
+            document.getElementById("photo").setAttribute(
+                "alt",
+                "Camera"
+            );
+
+            document.getElementById("photo").removeAttribute("title");
+        }
+
+    </script>
+
+</body>
+</html>
