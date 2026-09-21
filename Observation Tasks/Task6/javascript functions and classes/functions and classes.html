@@ -1,0 +1,245 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions vs Classes</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef2f7;
+            margin: 0;
+            padding: 30px;
+            color: #2c3e50;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1e3a5f;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #2878b5;
+            border-left: 5px solid #2878b5;
+            padding-left: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #2878b5;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f5f9fc;
+        }
+
+        .example {
+            background: #f0f7ff;
+            border-left: 5px solid #2878b5;
+            padding: 18px;
+            margin-top: 20px;
+            border-radius: 6px;
+        }
+
+        button {
+            background: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #219150;
+        }
+
+        .output {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fafafa;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            line-height: 1.8;
+        }
+
+        code {
+            background: #eee;
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>JavaScript Functions vs Classes</h1>
+
+    <h2>1. Difference Between Functions and Classes</h2>
+
+    <table>
+        <tr>
+            <th>Feature</th>
+            <th>Function</th>
+            <th>Class</th>
+        </tr>
+
+        <tr>
+            <td><b>Purpose</b></td>
+            <td>Used to perform a specific task.</td>
+            <td>Used as a blueprint for creating objects.</td>
+        </tr>
+
+        <tr>
+            <td><b>Syntax</b></td>
+            <td><code>function add() { }</code></td>
+            <td><code>class Student { }</code></td>
+        </tr>
+
+        <tr>
+            <td><b>Object Creation</b></td>
+            <td>Usually performs an operation or returns a value.</td>
+            <td>Objects are created using <code>new</code>.</td>
+        </tr>
+
+        <tr>
+            <td><b>Properties</b></td>
+            <td>Does not normally define object properties.</td>
+            <td>Can define common properties for objects.</td>
+        </tr>
+
+        <tr>
+            <td><b>Methods</b></td>
+            <td>Functions are used separately.</td>
+            <td>Methods can be defined inside the class.</td>
+        </tr>
+    </table>
+
+    <h2>2. Function Example</h2>
+
+    <div class="example">
+        <p>
+            A function performs a particular task. Here, the
+            <code>greet()</code> function displays a greeting.
+        </p>
+
+        <button onclick="showGreeting()">Call Function</button>
+
+        <div id="functionOutput" class="output">
+            Click the button to call the function.
+        </div>
+    </div>
+
+    <h2>3. Class Example</h2>
+
+    <div class="example">
+        <p>
+            A class acts as a blueprint. We can create multiple
+            student objects with common properties and methods.
+        </p>
+
+        <button onclick="createStudents()">Create Student Objects</button>
+
+        <div id="studentOutput" class="output">
+            Click the button to create student objects.
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+    // Function example
+    function greet(name) {
+        return "Hello, " + name + "!";
+    }
+
+    function showGreeting() {
+        document.getElementById("functionOutput").innerText =
+            greet("Bhanu");
+    }
+
+
+    // Class example
+    class Student {
+
+        // Constructor initializes object properties
+        constructor(name, rollNo, marks) {
+            this.name = name;
+            this.rollNo = rollNo;
+            this.marks = marks;
+        }
+
+        // Method to calculate grade
+        getGrade() {
+
+            if (this.marks >= 90) {
+                return "A+";
+            } 
+            else if (this.marks >= 75) {
+                return "A";
+            } 
+            else if (this.marks >= 60) {
+                return "B";
+            } 
+            else {
+                return "C";
+            }
+        }
+
+        // Method to display student details
+        getDetails() {
+            return `Name: ${this.name} | Roll No: ${this.rollNo} | Marks: ${this.marks} | Grade: ${this.getGrade()}`;
+        }
+    }
+
+
+    // Create multiple objects from the same class
+    function createStudents() {
+
+        const student1 = new Student("Rahul", 101, 92);
+        const student2 = new Student("Priya", 102, 84);
+        const student3 = new Student("Amit", 103, 68);
+
+        const result = `
+            1. ${student1.getDetails()}<br>
+            2. ${student2.getDetails()}<br>
+            3. ${student3.getDetails()}
+        `;
+
+        document.getElementById("studentOutput").innerHTML = result;
+    }
+
+</script>
+
+</body>
+</html>
+```
