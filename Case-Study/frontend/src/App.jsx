@@ -8,7 +8,13 @@ import AddStudent from './pages/AddStudent';
 import EditStudent from './pages/EditStudent';
 import './App.css';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/students';
+// Smart URL resolver: seamlessly handles base domain with or without trailing slash or /api/students
+const getApiBaseUrl = () => {
+  const envUrl = (import.meta.env.VITE_API_URL || 'http://localhost:5000').trim().replace(/\/+$/, '');
+  return envUrl.endsWith('/api/students') ? envUrl : `${envUrl}/api/students`;
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 /**
  * Root Application Component for Student Management System.
