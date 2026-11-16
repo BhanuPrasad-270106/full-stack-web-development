@@ -8,7 +8,7 @@ import AddStudent from './pages/AddStudent';
 import EditStudent from './pages/EditStudent';
 import './App.css';
 
-const API_BASE_URL = 'http://localhost:5000/api/students';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/students';
 
 /**
  * Root Application Component for Student Management System.
@@ -69,18 +69,21 @@ function App() {
       });
       const result = await res.json();
 
-      if (result.success) {
+      if (res.ok && result.success) {
         setStudents((prev) => [result.data, ...prev]);
         setIsServerConnected(true);
         showToast(`Student "${result.data.name}" added successfully!`, 'success');
+        return { success: true, data: result.data };
       } else {
-        showToast(result.message || 'Error adding student', 'warning');
+        const errorMsg = result.message || 'Error adding student to database.';
+        showToast(errorMsg, 'warning');
+        return { success: false, message: errorMsg };
       }
     } catch (error) {
-      // Local fallback
-      const newStudent = { ...studentData, id: Date.now().toString() };
-      setStudents((prev) => [newStudent, ...prev]);
-      showToast(`Student added locally (Start backend server to sync)`, 'info');
+      console.error('API Error adding student:', error);
+      const networkError = `Network Error: Cannot connect to backend at ${API_BASE_URL}. Ensure your backend server is running.`;
+      showToast('Network error: Unable to reach backend server', 'warning');
+      return { success: false, message: networkError };
     }
   };
 
@@ -102,22 +105,23 @@ function App() {
       });
       const result = await res.json();
 
-      if (result.success) {
+      if (res.ok && result.success) {
         setStudents((prev) =>
           prev.map((s) => ((s.id === studentId || s._id === studentId) ? result.data : s))
         );
         setSelectedStudent(result.data);
         setIsServerConnected(true);
         showToast(`Student "${result.data.name}" updated successfully!`, 'success');
+        return { success: true, data: result.data };
       } else {
-        showToast(result.message || 'Failed to update student', 'warning');
+        const errorMsg = result.message || 'Failed to update student';
+        showToast(errorMsg, 'warning');
+        return { success: false, message: errorMsg };
       }
     } catch (error) {
-      setStudents((prev) =>
-        prev.map((s) => ((s.id === studentId || s._id === studentId) ? updatedStudent : s))
-      );
-      setSelectedStudent(updatedStudent);
-      showToast(`Student updated locally`, 'info');
+      console.error('API Error updating student:', error);
+      showToast('Network error: Unable to reach backend server', 'warning');
+      return { success: false, message: 'Unable to reach backend server' };
     }
   };
 
@@ -134,7 +138,7 @@ function App() {
         });
         const result = await res.json();
 
-        if (result.success) {
+        if (res.ok && result.success) {
           setStudents((prev) => prev.filter((s) => s.id !== id && s._id !== id));
           setIsServerConnected(true);
           showToast(`Student "${name}" deleted successfully!`, 'warning');
@@ -142,8 +146,8 @@ function App() {
           showToast(result.message || 'Failed to delete student', 'warning');
         }
       } catch (error) {
-        setStudents((prev) => prev.filter((s) => s.id !== id && s._id !== id));
-        showToast(`Student "${name}" deleted locally`, 'info');
+        console.error('API Error deleting student:', error);
+        showToast('Network error: Unable to reach backend server', 'warning');
       }
 
       // If the currently edited student was deleted, clear selection

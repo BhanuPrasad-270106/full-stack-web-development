@@ -6,12 +6,28 @@ import StudentForm from '../components/StudentForm';
  */
 function AddStudent({ onAddStudent, onNavigateToView }) {
   const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleFormSubmit = (studentData) => {
-    onAddStudent(studentData);
-    setSuccessMessage(`Student "${studentData.name}" has been successfully enrolled!`);
+  const handleFormSubmit = async (studentData) => {
+    setIsSubmitting(true);
+    setErrorMessage('');
+    setSuccessMessage('');
 
-    // Auto-scroll to top to see confirmation
+    const result = await onAddStudent(studentData);
+    setIsSubmitting(false);
+
+    if (result && result.success) {
+      setSuccessMessage(`Student "${studentData.name}" has been successfully enrolled!`);
+      setErrorMessage('');
+    } else {
+      setErrorMessage(
+        result?.message || 'Failed to enroll student. Please verify your backend server is running.'
+      );
+      setSuccessMessage('');
+    }
+
+    // Auto-scroll to top to see feedback
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -66,6 +82,30 @@ function AddStudent({ onAddStudent, onNavigateToView }) {
         </div>
       )}
 
+      {/* Error Banner */}
+      {errorMessage && (
+        <div className="alert alert--danger">
+          <div className="alert__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="20" height="20">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+          </div>
+          <div className="alert__content">
+            <strong>Enrollment Failed</strong>
+            <p>{errorMessage}</p>
+          </div>
+          <button
+            type="button"
+            className="alert__close-btn"
+            onClick={() => setErrorMessage('')}
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
       {/* Main Form Card */}
       <div className="card">
         <div className="card__header">
@@ -78,7 +118,7 @@ function AddStudent({ onAddStudent, onNavigateToView }) {
         <StudentForm
           onSubmit={handleFormSubmit}
           onCancel={onNavigateToView}
-          submitLabel="Enroll Student"
+          submitLabel={isSubmitting ? "Enrolling..." : "Enroll Student"}
         />
       </div>
     </div>

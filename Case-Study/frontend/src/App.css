@@ -1081,6 +1081,12 @@
   color: var(--color-success-dark);
 }
 
+.alert--danger {
+  background-color: var(--color-danger-light);
+  border-color: #fecaca;
+  color: var(--color-danger-dark);
+}
+
 .alert__content {
   flex: 1;
   font-size: 0.9rem;

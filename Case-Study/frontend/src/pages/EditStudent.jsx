@@ -6,6 +6,8 @@ import StudentForm from '../components/StudentForm';
  */
 function EditStudent({ student, onUpdateStudent, onCancel }) {
   const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Fallback if no student was selected
   if (!student) {
@@ -34,12 +36,24 @@ function EditStudent({ student, onUpdateStudent, onCancel }) {
     );
   }
 
-  const handleFormSubmit = (updatedData) => {
-    onUpdateStudent({
+  const handleFormSubmit = async (updatedData) => {
+    setIsSubmitting(true);
+    setErrorMessage('');
+    setSuccessMessage('');
+
+    const result = await onUpdateStudent({
       ...updatedData,
-      id: student.id // maintain the same unique ID
+      id: student.id || student._id
     });
-    setSuccessMessage(`Record for "${updatedData.name}" has been successfully updated.`);
+    setIsSubmitting(false);
+
+    if (result && result.success) {
+      setSuccessMessage(`Record for "${updatedData.name}" has been successfully updated.`);
+      setErrorMessage('');
+    } else {
+      setErrorMessage(result?.message || 'Failed to update student in database.');
+      setSuccessMessage('');
+    }
 
     // Scroll to top to see notification
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -96,6 +110,30 @@ function EditStudent({ student, onUpdateStudent, onCancel }) {
         </div>
       )}
 
+      {/* Error Notification */}
+      {errorMessage && (
+        <div className="alert alert--danger">
+          <div className="alert__icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="20" height="20">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+          </div>
+          <div className="alert__content">
+            <strong>Update Failed</strong>
+            <p>{errorMessage}</p>
+          </div>
+          <button
+            type="button"
+            className="alert__close-btn"
+            onClick={() => setErrorMessage('')}
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
       {/* Main Edit Form Card */}
       <div className="card">
         <div className="card__header">
@@ -103,14 +141,14 @@ function EditStudent({ student, onUpdateStudent, onCancel }) {
             <h3 className="card__title">Update Student Information</h3>
             <p className="card__subtitle">Modify any of the details below and click Save Changes.</p>
           </div>
-          <span className="badge badge--code">ID: #{student.id}</span>
+          <span className="badge badge--code">ID: #{student.id || student._id}</span>
         </div>
 
         <StudentForm
           initialData={student}
           onSubmit={handleFormSubmit}
           onCancel={onCancel}
-          submitLabel="Save Changes"
+          submitLabel={isSubmitting ? "Saving..." : "Save Changes"}
         />
       </div>
     </div>
